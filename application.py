@@ -1,14 +1,15 @@
 from flask import Flask
 
-application = Flask(__name__)
+global app
+appl = Flask(__name__)
 
-@application.route('/')
+@app.route('/')
 def Welcome():
     return render_template('index.html')
 
-'''if __name__ == "__main__":
-    application.run()'''
+if __name__ == "__main__":
+    app.run()
 
-port = os.getenv('PORT', '8000')
+'''port = os.getenv('PORT', '8000')
 if __name__== "__main__":
-    app.run(host="ec2-54-200-173-41.us-west-2.compute.amazonaws.com", port=int(port))
+    app.run(host="ec2-54-200-173-41.us-west-2.compute.amazonaws.com", port=int(port))'''
