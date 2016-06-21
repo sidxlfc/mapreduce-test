@@ -11,8 +11,11 @@ def Welcome():
 @app.route('/execute')
 def execute():
 
-	toreturn = os.popen("cat /home/ubuntu/hduser/newdata.csv | /home/ubuntu/hduser/mapper.py | sort -k1,1 | /home/ubuntu/hduser/reducer.py").read()
+	#toreturn = os.popen("cat /home/ubuntu/hduser/newdata.csv | /home/ubuntu/hduser/mapper.py | sort -k1,1 | /home/ubuntu/hduser/reducer.py").read()
+	os.system("/usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar -D mapred.map.tasks=3 -D mapred.reduce.tasks=1 -input /input/* -output /out2/ -mapper /home/ubuntu/hduser/mapper.py -file /home/ubuntu/hduser/mapper.py -reducer /home/ubuntu/hduser/reducer.py -file /home/ubuntu/hduser/reducer.py")
 
+	toreturn = os.popen("hdfs dfs -cat /out2/part-00000")
+	
 	return render_template("index.html", todisplay = toreturn)
 
 if __name__ == "__main__":
