@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import Flask, render_template, redirect
 
 global app
-appl = Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def Welcome():
