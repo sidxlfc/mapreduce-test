@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect
 import os
+import subprocess
 
 global app
 app = Flask(__name__)
@@ -12,7 +13,7 @@ def Welcome():
 def execute():
 
 	#toreturn = os.popen("cat /home/ubuntu/hduser/newdata.csv | /home/ubuntu/hduser/mapper.py | sort -k1,1 | /home/ubuntu/hduser/reducer.py").read()
-	x = os.popen("/usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar -D mapred.map.tasks=3 -D mapred.reduce.tasks=1 -input /input/* -output /out2/ -mapper /home/ubuntu/hduser/mapper.py -file /home/ubuntu/hduser/mapper.py -reducer /home/ubuntu/hduser/reducer.py -file /home/ubuntu/hduser/reducer.py")
+	x = subprocess.call("/usr/local/hadoop/bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar -D mapred.map.tasks=3 -D mapred.reduce.tasks=1 -input /input/* -output /out2/ -mapper /home/ubuntu/hduser/mapper.py -file /home/ubuntu/hduser/mapper.py -reducer /home/ubuntu/hduser/reducer.py -file /home/ubuntu/hduser/reducer.py")
 
 	print str(x)
 
