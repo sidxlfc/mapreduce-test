@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect
+import os
 
 global app
 app = Flask(__name__)
@@ -12,7 +13,7 @@ def execute():
 
 	toreturn = os.popen("cat /home/ubuntu/hduser/newdata.csv | /home/ubuntu/hduser/mapper.py | sort -k1,1 | /home/ubuntu/hduser/reducer.py").read()
 
-    return render_template("index.html", todisplay = toreturn)
+	return render_template("index.html", todisplay = toreturn)
 
 if __name__ == "__main__":
     app.run()
